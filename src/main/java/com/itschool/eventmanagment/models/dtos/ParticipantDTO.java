@@ -1,14 +1,15 @@
 package com.itschool.eventmanagment.models.dtos;
 
 import lombok.Data;
+
 @Data
 public class ParticipantDTO {
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
 
-        private Long id;
-        private String firstName;
-        private String lastName;
-        private String email;
-        public String getFullName() {
-            return firstName + " " + lastName;
-        }
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
+}
