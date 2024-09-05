@@ -1,4 +1,4 @@
-package com.example.event_project.models.dtos;
+package com.itschool.eventmanagment.models.dtos;
 
 import lombok.Data;
 @Data

@@ -1,8 +1,15 @@
-package com.example.event_project.models.entities;
+package com.itschool.eventmanagment.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "participants")
 public class Participant {
@@ -22,5 +29,5 @@ public class Participant {
                 joinColumns = @JoinColumn(name = "participant_id"),
                 inverseJoinColumns = @JoinColumn(name = "event_id")
         )
-        private Set<Event> events = new ArrayList();
+        private Set<Event> events = new HashSet<>();
     }

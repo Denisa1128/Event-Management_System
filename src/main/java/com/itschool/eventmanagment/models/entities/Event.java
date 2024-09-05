@@ -1,11 +1,16 @@
-package com.example.event_project.models.entities;
+package com.itschool.eventmanagment.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "events")
 public class Event {
     @Id
@@ -20,11 +25,11 @@ public class Event {
     @Column
     private int maxParticipants;
     @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
-    private final List<Event> registeredParticipants = new ArrayList<>();
+    private List<Participant> registeredParticipants = new ArrayList<>();
 
     public boolean registerParticipant(Participant participant) {
         if (registeredParticipants.size() < maxParticipants) {
-            registeredParticipants.add(Event);
+            registeredParticipants.add(participant);
             return true;
         } else {
             return false;
