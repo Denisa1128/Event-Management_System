@@ -1,6 +1,5 @@
 package com.example.event_project.models.entities;
 
-import com.example.event_project.Participant;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
