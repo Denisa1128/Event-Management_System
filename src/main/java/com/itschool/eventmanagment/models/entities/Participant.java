@@ -23,7 +23,7 @@ public class Participant {
         private String lastName;
         @Column
         private String email;
-        @ManyToMany(mappedBy = "participants", cascade = CascadeType.ALL)
+        @ManyToMany
         @JoinTable(
                 name = "events_participants",
                 joinColumns = @JoinColumn(name = "participant_id"),
