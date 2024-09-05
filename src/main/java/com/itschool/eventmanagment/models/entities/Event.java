@@ -24,12 +24,17 @@ public class Event {
     private String location;
     @Column
     private int maxParticipants;
-    @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
-    private List<Participant> registeredParticipants = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "events_participants",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
+    private List<Participant> participants = new ArrayList<>();
 
     public boolean registerParticipant(Participant participant) {
-        if (registeredParticipants.size() < maxParticipants) {
-            registeredParticipants.add(participant);
+        if (participants.size() < maxParticipants) {
+            participants.add(participant);
             return true;
         } else {
             return false;
