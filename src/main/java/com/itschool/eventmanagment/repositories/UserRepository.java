@@ -1,4 +1,4 @@
-package com.itschool.eventmanagment.models.repositories;
+package com.itschool.eventmanagment.repositories;
 
 
 import com.itschool.eventmanagment.models.entities.User;
