@@ -22,12 +22,13 @@ public class Event {
     @ManyToMany(mappedBy = "events", cascade = CascadeType.ALL)
     private final List<Event> registeredParticipants = new ArrayList<>();
 
-    public boolean registerParticipant(Participant participant) {
-        if (registeredParticipants.size() < maxParticipants) {
-            registeredParticipants.add(Event);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean registerParticipant(Participant participant) {
+//        if (registeredParticipants.size() < maxParticipants) {
+//            Event event = new Event();
+//            registeredParticipants.add(event);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }
