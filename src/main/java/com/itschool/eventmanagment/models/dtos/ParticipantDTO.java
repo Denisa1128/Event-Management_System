@@ -2,7 +2,6 @@ package com.itschool.eventmanagment.models.dtos;
 
 import lombok.Data;
 
-@Data
 public class ParticipantDTO {
     private Long id;
     private String firstName;
