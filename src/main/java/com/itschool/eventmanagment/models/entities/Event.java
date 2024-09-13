@@ -32,6 +32,10 @@ public class Event {
     )
     private List<Participant> participants = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
     public boolean registerParticipant(Participant participant) {
         if (participants.size() < maxParticipants) {
             participants.add(participant);
