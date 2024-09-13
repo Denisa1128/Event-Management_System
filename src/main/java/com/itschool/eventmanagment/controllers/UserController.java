@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("api/users/{id}/events")
-    public ResponseEntity<List<EventDTO>> getUserEvents(@PathVariable String id) {
-        return ResponseEntity.ok(userService.getUsersEvents());
+    public ResponseEntity<List<EventDTO>> getUserEvents(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserEvents(id));
     }
 }

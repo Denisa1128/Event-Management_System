@@ -6,14 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class EventControler {
     private final EventService eventService;
+
     public EventControler(EventService eventService) {
         this.eventService = eventService;
     }
+
     @GetMapping("api/events")
-    public ResponseEntity<EventDTO> getEvents(){
+    public ResponseEntity<List<EventDTO>> getEvents() {
         return ResponseEntity.ok(eventService.getEvents());
     }
 }
