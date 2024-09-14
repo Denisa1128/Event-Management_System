@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userWithEvent.get();
-        List<Event> events = eventRepository.findByUserId(user.getId());
+        List<Event> events = eventRepository.findByUserId(user.getManagedEvent());
 
         return events.stream()
                 .map(event -> objectMapper.convertValue(event, EventDTO.class))
