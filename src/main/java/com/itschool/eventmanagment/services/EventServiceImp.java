@@ -37,6 +37,7 @@ public class EventServiceImp implements EventService {
         return null;
     }
 
+    @Override
     public List<Participant> getRegisteredParticipants(Long eventId) {
         Optional<Event> event = eventRepository.findById(eventId);
         return event.map(Event::getParticipants).orElse(Collections.emptyList());

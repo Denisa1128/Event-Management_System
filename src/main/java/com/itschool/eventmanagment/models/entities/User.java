@@ -31,6 +31,7 @@ public class User {
     private String lastName;
     @Column
     private String email;
+
     @OneToMany
-    private Set<Event> managedEvent= new HashSet();
+    private Set<Event> managedEvent = new HashSet();
 }

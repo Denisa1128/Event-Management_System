@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "events")
 public class Event {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
@@ -24,12 +24,14 @@ public class Event {
     private String location;
     @Column
     private int maxParticipants;
+
     @ManyToMany
     @JoinTable(
             name = "events_participants",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
+
     private List<Participant> participants = new ArrayList<>();
 
     public boolean registerParticipant(Participant participant) {

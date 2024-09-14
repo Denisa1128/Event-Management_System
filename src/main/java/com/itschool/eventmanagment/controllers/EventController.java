@@ -22,7 +22,6 @@ public class EventController {
 
     @GetMapping("api/events")
     public ResponseEntity<List<EventDTO>> getEvents() {
-
         return ResponseEntity.ok(eventService.getEvents());
     }
 
