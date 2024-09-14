@@ -1,8 +1,15 @@
 package com.itschool.eventmanagment.models.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.itschool.eventmanagment.models.dtos.EventDTO;
+import com.itschool.eventmanagment.models.dtos.LocalDateTimeDeserializer;
+import com.itschool.eventmanagment.models.dtos.LocalDateTimeSerializer;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,13 +18,16 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "events")
 public class Event {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String name;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Column
     private LocalDateTime dateTime;
     @Column
