@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long > {
-    List<Event> findByUserId(Set<Event> id);
+public interface EventRepository extends JpaRepository<Event, Long> {
+    List<Event> findByUserId(Long userId);
 }

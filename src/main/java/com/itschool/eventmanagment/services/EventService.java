@@ -8,7 +8,10 @@ import java.util.List;
 @Service
 public interface EventService {
     EventDTO createEvent(EventDTO eventDTO);
+
     List<EventDTO> deleteEvent();
+
     List<EventDTO> updateEvent();
+
     List<EventDTO> getEvents();
 }

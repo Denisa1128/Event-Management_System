@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "events")
 public class Event {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     @Column
     private String name;
@@ -33,7 +33,6 @@ public class Event {
     private List<Participant> participants = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="user_id")
     private User user;
 
     public boolean registerParticipant(Participant participant) {
