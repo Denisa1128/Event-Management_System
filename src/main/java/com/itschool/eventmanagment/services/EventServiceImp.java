@@ -6,7 +6,9 @@ import com.itschool.eventmanagment.models.entities.Event;
 import com.itschool.eventmanagment.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImp implements EventService {
@@ -40,7 +42,15 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public List<EventDTO> getEvents() {
-        return null;
+    public List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy) {
+        List<Event> events;
+        if ("location".equalsIgnoreCase(sortBy)) {
+            events = eventRepository.findByDateTimeBetweenOrLocationContainingIgnoreCaseOrderByLocationAsc(to, from, location);
+        } else {
+            events = eventRepository.findByDateTimeBetweenOrLocationContainingIgnoreCaseOrderByDateTime(to, from, location);
+        }
+        return events.stream().map(event -> objectMapper.convertValue(event, EventDTO.class)).collect(Collectors.toList());
     }
 }
+
+
