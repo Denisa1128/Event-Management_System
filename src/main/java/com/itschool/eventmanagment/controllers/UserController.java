@@ -1,11 +1,11 @@
 package com.itschool.eventmanagment.controllers;
 
 import com.itschool.eventmanagment.models.dtos.EventDTO;
+import com.itschool.eventmanagment.models.dtos.UserDTO;
+import com.itschool.eventmanagment.models.entities.User;
 import com.itschool.eventmanagment.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +18,13 @@ public class UserController {
     }
 
     @GetMapping("api/users/{id}/events")
-    public ResponseEntity<List<EventDTO>> getUserEvents(@PathVariable String id) {
-        return ResponseEntity.ok(userService.getUsersEvents());
+    public ResponseEntity<List<EventDTO>> getUserEvents(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserEvents(id));
+    }
+
+    @PostMapping("api/users")
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.createUser(userDTO));
     }
 }
+

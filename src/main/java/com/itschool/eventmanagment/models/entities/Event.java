@@ -23,7 +23,7 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     @Column
     private String name;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -41,6 +41,9 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
     private List<Participant> participants = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public boolean registerParticipant(Participant participant) {
         if (participants.size() < maxParticipants) {
