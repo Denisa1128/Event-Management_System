@@ -1,12 +1,10 @@
 package com.itschool.eventmanagment.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
 import com.itschool.eventmanagment.models.entities.Event;
 import com.itschool.eventmanagment.models.entities.Participant;
 import com.itschool.eventmanagment.repositories.EventRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImp implements EventService {
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
     public EventServiceImp(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
