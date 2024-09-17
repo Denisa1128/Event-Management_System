@@ -1,6 +1,8 @@
 package com.itschool.eventmanagment.controllers;
 
+import com.itschool.eventmanagment.models.dtos.DetailsParticipantDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.models.entities.Participant;
 import com.itschool.eventmanagment.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class EventController {
     }
 
     @GetMapping("events/{id}/participants")
-    public List<Participant> getRegisteredParticipants(@PathVariable("id") Long eventId) {
+    public List<DetailsParticipantDTO> getRegisteredParticipants(@PathVariable("id") Long eventId) {
         return eventService.getRegisteredParticipants(eventId);
     }
 }

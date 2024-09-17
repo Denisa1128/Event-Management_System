@@ -1,8 +1,7 @@
 package com.itschool.eventmanagment.services;
 
+import com.itschool.eventmanagment.models.dtos.DetailsParticipantDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
-import com.itschool.eventmanagment.models.entities.Participant;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface EventService {
 
     List<EventDTO> getEvents();
 
-    List<Participant> getRegisteredParticipants(Long eventId);
+    List<DetailsParticipantDTO> getRegisteredParticipants(Long eventId);
 }

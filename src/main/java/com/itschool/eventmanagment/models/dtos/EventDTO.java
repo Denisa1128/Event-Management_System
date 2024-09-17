@@ -9,11 +9,10 @@ import java.util.List;
 
 @Data
 public class EventDTO {
-    private Long Id;
+    private Long id;
     private String name;
     private LocalDateTime dateTime;
     private String location;
-
     private int maxParticipants;
     private List<Participant> registeredParticipants = new ArrayList<>();
 }
