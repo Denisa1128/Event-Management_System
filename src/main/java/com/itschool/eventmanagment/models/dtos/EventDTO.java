@@ -18,6 +18,8 @@ public class EventDTO {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;
     private String location;
+    private Long userId;
+
     private int maxParticipants;
     private List<Participant> registeredParticipants = new ArrayList<>();
 }
