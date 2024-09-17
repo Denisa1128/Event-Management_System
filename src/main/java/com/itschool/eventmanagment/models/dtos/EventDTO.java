@@ -1,6 +1,5 @@
 package com.itschool.eventmanagment.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.itschool.eventmanagment.models.entities.Participant;
