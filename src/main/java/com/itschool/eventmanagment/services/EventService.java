@@ -1,6 +1,6 @@
 package com.itschool.eventmanagment.services;
 
-import com.itschool.eventmanagment.models.dtos.DetailsParticipantDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface EventService {
 
     List<EventDTO> getEvents();
 
-    List<DetailsParticipantDTO> getRegisteredParticipants(Long eventId);
+    List<ParticipantDetailsDTO> getRegisteredParticipants(Long eventId);
 }

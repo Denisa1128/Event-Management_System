@@ -18,11 +18,11 @@ public class Event {
     private Long id;
     @Column
     private String name;
-    @Column
-    private LocalDateTime dateTime;
+    @Column (name = "event_date_time")
+    private LocalDateTime eventDateTime;
     @Column
     private String location;
-    @Column
+    @Column (name = "max_participants")
     private int maxParticipants;
 
     @ManyToMany

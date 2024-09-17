@@ -1,8 +1,8 @@
 package com.itschool.eventmanagment.services;
 
-import com.itschool.eventmanagment.models.dtos.DetailsParticipantDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
-import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.models.entities.Event;
 import com.itschool.eventmanagment.models.entities.Participant;
 import com.itschool.eventmanagment.repositories.EventRepository;
@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImp implements EventService {
-    @Autowired
     private EventRepository eventRepository;
+
+    public EventServiceImp(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     @Override
     public EventDTO createEvent(EventDTO eventDTO) {
@@ -37,28 +41,20 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public List<DetailsParticipantDTO> getRegisteredParticipants(Long eventId) {
-        Optional<Event> eventOptional = eventRepository.findById(eventId);
-        List<DetailsParticipantDTO> detailsParticipantDTOList = new ArrayList<>();
+    public List<ParticipantDetailsDTO> getRegisteredParticipants(Long eventId) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new EventNotFoundException("Event not found id: " + eventId));
 
-        if (eventOptional.isPresent()) {
-            Event event = eventOptional.get();
-            List<Participant> participants = event.getParticipants();
+        return mapParticipantsToDTOs(event.getParticipants());
+    }
 
-            if (participants == null) {
-                return detailsParticipantDTOList;
-            }
-
-            for (Participant participant : participants) {
-                DetailsParticipantDTO detailsParticipantDTO = new DetailsParticipantDTO();
-                detailsParticipantDTO.setFirstName(participant.getFirstName());
-                detailsParticipantDTO.setLastName(participant.getLastName());
-                detailsParticipantDTO.setEmail(participant.getEmail());
-
-                detailsParticipantDTOList.add(detailsParticipantDTO);
-            }
-            return detailsParticipantDTOList;
-        }
-        return detailsParticipantDTOList;
+    public List<ParticipantDetailsDTO> mapParticipantsToDTOs(List<Participant> participants) {
+        return participants.stream()
+                .map(participant -> new ParticipantDetailsDTO(
+                        participant.getFirstName(),
+                        participant.getLastName(),
+                        participant.getEmail()
+                ))
+                .collect(Collectors.toList());
     }
 }

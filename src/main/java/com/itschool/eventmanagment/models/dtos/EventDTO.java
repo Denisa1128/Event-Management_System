@@ -11,7 +11,7 @@ import java.util.List;
 public class EventDTO {
     private Long id;
     private String name;
-    private LocalDateTime dateTime;
+    private LocalDateTime eventDateTime;
     private String location;
     private int maxParticipants;
     private List<Participant> registeredParticipants = new ArrayList<>();
