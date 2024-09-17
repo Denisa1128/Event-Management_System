@@ -45,9 +45,9 @@ public class EventServiceImp implements EventService {
     public List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy) {
         List<Event> events;
         if ("location".equalsIgnoreCase(sortBy)) {
-            events = eventRepository.findByDateTimeBetweenOrLocationContainingIgnoreCaseOrderByLocationAsc(to, from, location);
+            events = eventRepository.findByDateTimeBetweenAndLocationContainingIgnoreCaseOrderByLocationAsc(to, from, location);
         } else {
-            events = eventRepository.findByDateTimeBetweenOrLocationContainingIgnoreCaseOrderByDateTime(to, from, location);
+            events = eventRepository.findByDateTimeBetweenAndLocationContainingIgnoreCaseOrderByDateTime(to, from, location);
         }
         return events.stream().map(event -> objectMapper.convertValue(event, EventDTO.class)).collect(Collectors.toList());
     }

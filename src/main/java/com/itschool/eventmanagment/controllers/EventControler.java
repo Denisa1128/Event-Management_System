@@ -3,6 +3,7 @@ package com.itschool.eventmanagment.controllers;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
 import com.itschool.eventmanagment.models.entities.Event;
 import com.itschool.eventmanagment.services.EventService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,10 @@ public class EventControler {
     }
 
     @GetMapping("/api/events")
-    public ResponseEntity<List<EventDTO>> searchEvent(@RequestParam(required = false) LocalDateTime from, @RequestParam(required = false) LocalDateTime to, @RequestParam(required = false) String location, @RequestParam(required = false) String sortBy) {
+    public ResponseEntity<List<EventDTO>> searchEvent(@RequestParam(required = false)@DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                                      @RequestParam(required = false)@DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
+                                                      @RequestParam(required = false) String location,
+                                                      @RequestParam(required = false) String sortBy) {
         return ResponseEntity.ok(eventService.getEvents(to, from, location, sortBy));
     }
 }
