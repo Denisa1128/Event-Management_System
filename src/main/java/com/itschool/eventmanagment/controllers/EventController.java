@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-public class EventControler {
+public class EventController {
     private final EventService eventService;
 
-    public EventControler(EventService eventService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
