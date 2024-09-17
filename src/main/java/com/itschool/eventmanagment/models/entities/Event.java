@@ -23,7 +23,7 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @Column
     private String name;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
