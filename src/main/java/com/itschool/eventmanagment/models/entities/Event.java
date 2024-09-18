@@ -1,5 +1,6 @@
 package com.itschool.eventmanagment.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
@@ -25,12 +26,10 @@ public class Event {
     private Long id;
     @Column
     private String name;
-    @Column (name = "event_date_time")
-    private LocalDateTime eventDateTime;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @Column
-    private LocalDateTime dateTime;
+    @Column (name = "event_date_time")
+    private LocalDateTime eventDateTime;
     @Column
     private String location;
     @Column (name = "max_participants")
@@ -42,7 +41,7 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
-
+    @JsonIgnore
     private List<Participant> participants = new ArrayList<>();
 
     @ManyToOne

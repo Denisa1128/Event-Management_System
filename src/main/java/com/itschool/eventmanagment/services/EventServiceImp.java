@@ -1,4 +1,5 @@
 package com.itschool.eventmanagment.services;
+import com.itschool.eventmanagment.exceptions.EventNotFoundException;
 import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
 import com.itschool.eventmanagment.models.entities.Event;
@@ -6,7 +7,6 @@ import com.itschool.eventmanagment.models.entities.Participant;
 import com.itschool.eventmanagment.repositories.EventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itschool.eventmanagment.models.entities.User;
-import com.itschool.eventmanagment.repositories.EventRepository;
 import com.itschool.eventmanagment.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -59,9 +59,9 @@ public class EventServiceImp implements EventService {
     public List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy) {
         List<Event> events;
         if ("location".equalsIgnoreCase(sortBy)) {
-            events = eventRepository.findByDateTimeBetweenAndLocationContainingIgnoreCaseOrderByLocationAsc(to, from, location);
+            events = eventRepository.findByEventDateTimeBetweenAndLocationContainingIgnoreCaseOrderByLocationAsc(to, from, location);
         } else {
-            events = eventRepository.findByDateTimeBetweenAndLocationContainingIgnoreCaseOrderByDateTime(to, from, location);
+            events = eventRepository.findByEventDateTimeBetweenAndLocationContainingIgnoreCaseOrderByEventDateTime(to, from, location);
         }
         return events.stream().map(event -> objectMapper.convertValue(event, EventDTO.class)).collect(Collectors.toList());
     }
