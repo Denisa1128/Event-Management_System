@@ -5,5 +5,7 @@ import com.itschool.eventmanagment.models.dtos.EventDTO;
 import java.util.List;
 
 public interface UserService {
-    List<EventDTO> getUsersEvents();
+    UserDTO createUser(UserDTO userDTO);
+
+    List<EventDTO> getUserEvents(Long id);
 }
