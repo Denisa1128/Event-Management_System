@@ -8,7 +8,6 @@ import com.itschool.eventmanagment.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EventServiceImp implements EventService {
@@ -53,6 +52,6 @@ public class EventServiceImp implements EventService {
                         participant.getLastName(),
                         participant.getEmail()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
