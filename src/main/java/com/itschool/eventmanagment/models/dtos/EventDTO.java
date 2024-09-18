@@ -13,11 +13,11 @@ import java.util.List;
 public class EventDTO {
     private Long id;
     private String name;
-    private LocalDateTime eventDateTime;
+    //private LocalDateTime eventDateTime;
     private String location;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime dateTime;
+    private LocalDateTime eventDateTime;
     private Long userId;
     private int maxParticipants;
     private List<Participant> registeredParticipants = new ArrayList<>();

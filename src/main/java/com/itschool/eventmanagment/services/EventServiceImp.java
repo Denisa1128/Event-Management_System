@@ -49,6 +49,12 @@ public class EventServiceImp implements EventService {
         return null;
     }
 
+    //nu exista implementare
+    @Override
+    public List<EventDTO> getEvents() {
+        return null;
+    }
+
     @Override
     public List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy) {
         List<Event> events;

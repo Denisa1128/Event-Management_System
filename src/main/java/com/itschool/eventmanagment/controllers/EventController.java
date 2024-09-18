@@ -35,13 +35,13 @@ public class EventController {
     public ResponseEntity<List<ParticipantDetailsDTO>> getRegisteredParticipants(@PathVariable("id") Long eventId) {
         return ResponseEntity.ok(eventService.getRegisteredParticipants(eventId));
     }
-}
+
     @PostMapping("/api/events")
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {
         return ResponseEntity.ok(eventService.createEvent(eventDTO));
     }
 
-    @GetMapping("/api/events")
+    @GetMapping("/api/events/sorted")
     public ResponseEntity<List<EventDTO>> getFilteredAndSortedEvents(@RequestParam @NotNull(message = "from date is mandatory") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
                                                                      @RequestParam @NotNull(message = "to is mandatory") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
                                                                      @RequestParam @NotNull(message = "location is mandatory") String location,
