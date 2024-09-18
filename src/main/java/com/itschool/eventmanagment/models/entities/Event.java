@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +25,24 @@ public class Event {
     private Long id;
     @Column
     private String name;
+    @Column (name = "event_date_time")
+    private LocalDateTime eventDateTime;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Column
     private LocalDateTime dateTime;
     @Column
     private String location;
-    @Column
+    @Column (name = "max_participants")
     private int maxParticipants;
+
     @ManyToMany
     @JoinTable(
             name = "events_participants",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
+
     private List<Participant> participants = new ArrayList<>();
 
     @ManyToOne
