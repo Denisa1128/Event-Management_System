@@ -2,7 +2,7 @@ package com.itschool.eventmanagment.services;
 
 import com.itschool.eventmanagment.exceptions.EventNotFoundException;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
-import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.models.entities.Event;
 import com.itschool.eventmanagment.models.entities.Participant;
 import com.itschool.eventmanagment.models.entities.User;
@@ -83,16 +83,16 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public List<ParticipantDetailsDTO> getRegisteredParticipants(Long eventId) {
+    public List<ParticipantDTO> getRegisteredParticipants(Long eventId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new EventNotFoundException("Event not found id: " + eventId));
 
         return mapParticipantsToDTOs(event.getParticipants());
     }
 
-    public List<ParticipantDetailsDTO> mapParticipantsToDTOs(List<Participant> participants) {
+    public List<ParticipantDTO> mapParticipantsToDTOs(List<Participant> participants) {
         return participants.stream()
-                .map(participant -> new ParticipantDetailsDTO(
+                .map(participant -> new ParticipantDTO(
                         participant.getFirstName(),
                         participant.getLastName(),
                         participant.getEmail()

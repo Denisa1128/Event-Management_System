@@ -1,6 +1,6 @@
 package com.itschool.eventmanagment.services;
 
-import com.itschool.eventmanagment.models.dtos.ParticipantDetailsDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public interface EventService {
 
     List<EventDTO> getEvents();
 
-    List<ParticipantDetailsDTO> getRegisteredParticipants(Long eventId);
+    List<ParticipantDTO> getRegisteredParticipants(Long eventId);
   
     List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy);
 }
