@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         User user = userWithEvent.get();
         List<Event> events = eventRepository.findByUserId(id);
         List<EventDTO> listEvents = events.stream()
-                .map(EventServiceImp::mapEventToEventDto)
+                .map(EventDTO::mapEventToEventDto)
                 .toList();
         listEvents.forEach(eventDTO -> eventDTO.setUserId(user.getId()));
         return listEvents;

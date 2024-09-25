@@ -29,10 +29,10 @@ public class EventServiceImp implements EventService {
     @Override
     public EventDTO createEvent(EventDTO eventDTO) {
         User user = userRepository.findById(eventDTO.getUserId()).orElseThrow(() -> new RuntimeException("User with id " + eventDTO.getUserId() + "not found"));
-        Event eventEntityToBeSaved = mapEventDtoToEvent(eventDTO);
+        Event eventEntityToBeSaved = EventDTO.mapEventDtoToEvent(eventDTO);
         eventEntityToBeSaved.setUser(user);
         Event eventResponseEntity = eventRepository.save(eventEntityToBeSaved);
-        return mapEventToEventDto(eventResponseEntity);
+        return EventDTO.mapEventToEventDto(eventResponseEntity);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EventServiceImp implements EventService {
 
     @Override
     public List<EventDTO> getEvents() {
-        return eventRepository.findAll().stream().map(EventServiceImp::mapEventToEventDto).toList();
+        return eventRepository.findAll().stream().map(EventDTO::mapEventToEventDto).toList();
     }
 
     @Override
@@ -58,28 +58,7 @@ public class EventServiceImp implements EventService {
         } else {
             events = eventRepository.findByEventDateTimeBetweenAndLocationContainingIgnoreCaseOrderByEventDateTime(to, from, location);
         }
-        return events.stream().map(EventServiceImp::mapEventToEventDto).toList();
-    }
-
-    public static EventDTO mapEventToEventDto(Event event) {
-        EventDTO eventDTO = new EventDTO();
-        eventDTO.setId(event.getId());
-        eventDTO.setEventDateTime(event.getEventDateTime());
-        eventDTO.setName(event.getName());
-        eventDTO.setLocation(event.getLocation());
-        eventDTO.setUserId(event.getUser().getId());
-        eventDTO.setMaxParticipants(event.getMaxParticipants());
-        return eventDTO;
-    }
-
-   public static Event mapEventDtoToEvent(EventDTO eventDTO) {
-        Event event = new Event();
-        event.setId(eventDTO.getId());
-        event.setEventDateTime(eventDTO.getEventDateTime());
-        event.setName(eventDTO.getName());
-        event.setLocation(eventDTO.getLocation());
-        event.setMaxParticipants(eventDTO.getMaxParticipants());
-        return event;
+        return events.stream().map(EventDTO::mapEventToEventDto).toList();
     }
 
     @Override
