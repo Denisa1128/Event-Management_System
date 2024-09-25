@@ -1,15 +1,18 @@
 package com.itschool.eventmanagment.models.entities;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.itschool.eventmanagment.models.dtos.EventDTO;
-import com.itschool.eventmanagment.models.dtos.LocalDateTimeDeserializer;
-import com.itschool.eventmanagment.models.dtos.LocalDateTimeSerializer;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,14 +29,13 @@ public class Event {
     private Long id;
     @Column
     private String name;
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @Column
-    private LocalDateTime dateTime;
+    @Column(name = "event_date_time")
+    private LocalDateTime eventDateTime;
     @Column
     private String location;
-    @Column
+    @Column(name = "max_participants")
     private int maxParticipants;
+
     @ManyToMany
     @JoinTable(
             name = "events_participants",
@@ -41,6 +43,9 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
     private List<Participant> participants = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public boolean registerParticipant(Participant participant) {
         if (participants.size() < maxParticipants) {
