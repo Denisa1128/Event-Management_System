@@ -11,7 +11,7 @@ public interface EventService {
 
     List<EventDTO> deleteEvent();
 
-    List<EventDTO> updateEvent();
+    List<EventDTO> updateEvent(EventDTO eventDTO);
 
     List<EventDTO> getEvents();
 

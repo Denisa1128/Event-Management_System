@@ -41,14 +41,13 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public List<EventDTO> updateEvent() {
+    public List<EventDTO> updateEvent(EventDTO eventDTO) {
         return null;
     }
 
-    //nu exista implementare
     @Override
     public List<EventDTO> getEvents() {
-        return null;
+        return eventRepository.findAll().stream().map(EventServiceImp::mapEventToEventDto).toList();
     }
 
     @Override
@@ -62,7 +61,7 @@ public class EventServiceImp implements EventService {
         return events.stream().map(EventServiceImp::mapEventToEventDto).toList();
     }
 
-    private static EventDTO mapEventToEventDto(Event event) {
+    public static EventDTO mapEventToEventDto(Event event) {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(event.getId());
         eventDTO.setEventDateTime(event.getEventDateTime());
@@ -73,7 +72,7 @@ public class EventServiceImp implements EventService {
         return eventDTO;
     }
 
-    private static Event mapEventDtoToEvent(EventDTO eventDTO) {
+   public static Event mapEventDtoToEvent(EventDTO eventDTO) {
         Event event = new Event();
         event.setId(eventDTO.getId());
         event.setEventDateTime(eventDTO.getEventDateTime());
