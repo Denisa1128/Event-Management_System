@@ -1,15 +1,18 @@
 package com.itschool.eventmanagment.controllers;
 
 
-import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.services.EventService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,5 +51,18 @@ public class EventController {
                                                                      @RequestParam @NotNull(message = "location is mandatory") String location,
                                                                      @RequestParam(required = false) String sortBy) {
         return ResponseEntity.ok(eventService.getEvents(to, from, location, sortBy));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteEvent(@PathVariable("id") Long id){
+        eventService.deleteEvent(id);
+        return ResponseEntity.ok("Event delete succesfully");
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EventDTO> updateEvent(@PathVariable Long id, @RequestBody EventDTO eventDTO){
+        if (id!= eventDTO.getId()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+       EventDTO updatedEvent = eventService.updateEvent(eventDTO);
+        return ResponseEntity.ok(updatedEvent);
     }
 }

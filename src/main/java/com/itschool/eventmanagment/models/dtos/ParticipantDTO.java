@@ -36,4 +36,5 @@ public class ParticipantDTO {
     public static Participant toParticipant(ParticipantDTO participant) {
         return new Participant(participant.getId(), participant.getFirstName(), participant.getLastName(), participant.getEmail());
     }
+
 }

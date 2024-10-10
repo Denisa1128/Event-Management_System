@@ -26,7 +26,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 
     @Override
     public void deleteParticipant(Long id) {
-        participantRepository.findById(id).orElseThrow(() -> new ParticipantNotFoundException("Participant not found with id"));
+        Participant participant = participantRepository.findById(id).orElseThrow(() -> new ParticipantNotFoundException("Participant not found with id"));
         participantRepository.deleteById(id);
     }
 
