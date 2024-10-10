@@ -1,7 +1,7 @@
 package com.itschool.eventmanagment.services;
 
-import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 import com.itschool.eventmanagment.models.dtos.EventDTO;
+import com.itschool.eventmanagment.models.dtos.ParticipantDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.List;
 public interface EventService {
     EventDTO createEvent(EventDTO eventDTO);
 
-    List<EventDTO> deleteEvent();
+    void deleteEvent(Long id);
 
-    List<EventDTO> updateEvent(EventDTO eventDTO);
+   EventDTO updateEvent(EventDTO eventDTO);
 
     List<EventDTO> getEvents();
 

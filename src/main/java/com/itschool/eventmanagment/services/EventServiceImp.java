@@ -36,13 +36,19 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public List<EventDTO> deleteEvent() {
-        return null;
+    public void  deleteEvent(Long id) {
+    Event event = eventRepository.findById(id).orElseThrow(()-> new EventNotFoundException("Event not found with id: " + id ));
+    eventRepository.deleteById(id);
     }
 
     @Override
-    public List<EventDTO> updateEvent(EventDTO eventDTO) {
-        return null;
+    public EventDTO updateEvent(EventDTO eventDTO) {
+        Event event= eventRepository.findById(eventDTO.getId()).orElseThrow(()->  new EventNotFoundException("Event not found with id: "));
+        Event eventEntityBeUpdated = EventDTO.mapEventDtoToEvent(eventDTO);
+        User user= userRepository.findById(eventDTO.getUserId()).orElseThrow();
+        eventEntityBeUpdated.setUser(user);
+        Event eventResponseEntity = eventRepository.save(eventEntityBeUpdated);
+        return EventDTO.mapEventToEventDto(eventResponseEntity);
     }
 
     @Override
@@ -65,13 +71,13 @@ public class EventServiceImp implements EventService {
     public List<ParticipantDTO> getRegisteredParticipants(Long eventId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new EventNotFoundException("Event not found id: " + eventId));
-
         return mapParticipantsToDTOs(event.getParticipants());
     }
 
     public List<ParticipantDTO> mapParticipantsToDTOs(List<Participant> participants) {
         return participants.stream()
                 .map(participant -> new ParticipantDTO(
+                        participant.getId(),
                         participant.getFirstName(),
                         participant.getLastName(),
                         participant.getEmail()

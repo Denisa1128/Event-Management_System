@@ -45,7 +45,17 @@ public class Event {
     private List<Participant> participants = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    public Event(Long id, String name, LocalDateTime eventDateTime, String location, int maxParticipants, User user) {
+        this.id = id;
+        this.name = name;
+        this.eventDateTime = eventDateTime;
+        this.location = location;
+        this.maxParticipants = maxParticipants;
+        this.user = user;
+    }
 
     public boolean registerParticipant(Participant participant) {
         if (participants.size() < maxParticipants) {
