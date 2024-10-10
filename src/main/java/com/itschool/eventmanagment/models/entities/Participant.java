@@ -22,12 +22,18 @@ public class Participant {
     @Column
     private String email;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "events_participants",
             joinColumns = @JoinColumn(name = "participant_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-
     private Set<Event> events = new HashSet<>();
+
+    public Participant(Long id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName= firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 }

@@ -9,13 +9,13 @@ import java.util.List;
 public interface EventService {
     EventDTO createEvent(EventDTO eventDTO);
 
-    List<EventDTO> deleteEvent();
+    void deleteEvent(Long id);
 
-    List<EventDTO> updateEvent(EventDTO eventDTO);
+    EventDTO updateEvent(EventDTO eventDTO);
 
     List<EventDTO> getEvents();
 
     List<ParticipantDTO> getRegisteredParticipants(Long eventId);
-  
+
     List<EventDTO> getEvents(LocalDateTime to, LocalDateTime from, String location, String sortBy);
 }
